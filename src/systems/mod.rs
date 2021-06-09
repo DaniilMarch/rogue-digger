@@ -3,6 +3,7 @@ mod movement;
 mod player_input;
 mod render;
 mod turn_end;
+mod collisions;
 
 pub fn build_player_input_scheduler() -> Schedule {
     Schedule::builder()
@@ -15,6 +16,8 @@ pub fn build_player_input_scheduler() -> Schedule {
 
 pub fn build_player_turn_scheduler() -> Schedule {
     Schedule::builder()
+        .add_system(collisions::collisions_system())
+        .flush()
         .add_system(movement::movement_system())
         .flush()
         .add_system(render::render_system())
@@ -24,6 +27,8 @@ pub fn build_player_turn_scheduler() -> Schedule {
 
 pub fn build_npc_turn_scheduler() -> Schedule {
     Schedule::builder()
+        .add_system(collisions::collisions_system())
+        .flush()
         .add_system(movement::movement_system())
         .flush()
         .add_system(render::render_system())

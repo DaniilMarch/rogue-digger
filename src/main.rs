@@ -15,18 +15,18 @@ mod prelude {
 
 use boot::{
     game_state::State,
-    initial_level::generate_initial_level,
-    terminal::build_terminal,
+    initial_level,
+    terminal,
 };
 use components::common::{Player, Render};
 use prelude::*;
 use resources::turn_state::TurnState;
 
 fn main() -> BError {
-    let ctx = build_terminal();
+    let ctx = terminal::build();
     let mut state = State::new();
     state.resources.insert(TurnState::PlayerInput);
-    generate_initial_level(&mut state.ecs);
+    initial_level::generate(&mut state.ecs);
     state.ecs.push((
         Player,
         Render {

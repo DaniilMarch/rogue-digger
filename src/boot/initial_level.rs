@@ -2,7 +2,7 @@ use crate::components::common::*;
 use crate::components::level::*;
 use crate::prelude::*;
 
-pub fn generate_initial_level(ecs: &mut World) {
+pub fn generate(ecs: &mut World) {
     for x in 0..=SCREEN_WIDTH {
         for y in 0..=SCREEN_HEIGHT {
             ecs.push((

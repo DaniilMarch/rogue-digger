@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-pub fn build_terminal() -> BTerm {
+pub fn build() -> BTerm {
     let context = BTermBuilder::new()
         .with_title("Straight to Hell")
         .with_fps_cap(30.0)
