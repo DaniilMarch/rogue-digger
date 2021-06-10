@@ -11,6 +11,8 @@ mod prelude {
     pub use legion::*;
     pub const SCREEN_WIDTH: i32 = 80;
     pub const SCREEN_HEIGHT: i32 = 50;
+    pub const DISPLAY_WIDTH: i32 = SCREEN_WIDTH / 2;
+    pub const DISPLAY_HEIGHT: i32 = SCREEN_HEIGHT / 2;
 }
 
 use boot::{
@@ -35,5 +37,6 @@ fn main() -> BError {
         },
         Point::new(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2),
     ));
+    state.resources.insert(resources::camera::Camera::new(Point::new(DISPLAY_WIDTH, DISPLAY_HEIGHT)));
     main_loop(ctx, state)
 }
