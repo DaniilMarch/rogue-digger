@@ -8,6 +8,5 @@ pub fn turn_end(#[resource] turn_state: &mut TurnState) {
         TurnState::PlayerTurn => TurnState::NpcTurn,
         TurnState::NpcTurn => TurnState::PlayerInput,
     };
-
     *turn_state = new_state;
 }
