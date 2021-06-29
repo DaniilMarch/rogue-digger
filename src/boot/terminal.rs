@@ -11,6 +11,7 @@ pub fn build() -> BTerm {
         .with_sparse_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "terminal8x8.png")
         .with_sparse_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "terminal8x8.png")
         .with_sparse_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "terminal8x8.png")
+        .with_sparse_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "terminal8x8.png")
         .build()
         .expect("Terminal build error");
 

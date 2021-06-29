@@ -1,6 +1,6 @@
+use crate::components::common::MovementIntention;
+use crate::components::level::Wall;
 use crate::prelude::*;
-use crate::components::common::{MovementIntention};
-use crate::components::level::{Wall};
 
 #[system]
 #[read_component(MovementIntention)]
@@ -12,7 +12,9 @@ pub fn collisions(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
     //TODO: improve iterations
     for (entity, movement_intention) in movers.iter(ecs) {
         for (_, point) in walls.iter(ecs) {
-            if point.x == movement_intention.destination.x && point.y == movement_intention.destination.y {
+            if point.x == movement_intention.destination.x
+                && point.y == movement_intention.destination.y
+            {
                 commands.remove(*entity);
                 break;
             }

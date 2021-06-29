@@ -32,7 +32,7 @@ pub fn generate(ecs: &mut World) {
                 (25, to_cp437('░'), ColorPair::new(WHITE, BLACK)),
                 (0, to_cp437('░'), ColorPair::new(WHITE, BLACK)),
             ],
-        }
+        },
     ));
     ecs.push((
         Point::new(SCREEN_WIDTH / 2 - 2, SCREEN_HEIGHT / 2 - 2),
@@ -50,6 +50,6 @@ pub fn generate(ecs: &mut World) {
                 (25, to_cp437('░'), ColorPair::new(WHITE, BLACK)),
                 (0, to_cp437('░'), ColorPair::new(WHITE, BLACK)),
             ],
-        }
+        },
     ));
 }

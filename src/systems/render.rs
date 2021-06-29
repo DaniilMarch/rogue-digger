@@ -1,5 +1,5 @@
 use crate::components::{common::*, level::*};
-use crate::resources::camera::{Camera};
+use crate::resources::camera::Camera;
 
 #[system]
 #[read_component(Floor)]
@@ -28,8 +28,17 @@ pub fn render(ecs: &SubWorld, #[resource] camera: &Camera) {
     }
     walls_batch.submit(rendered_tiles).expect("Render error");
 
+    let mut items_batch = DrawBatch::new();
+    items_batch.target(2);
+    let mut items = <(&Point, &Render)>::query().filter(component::<Item>());
+    for (point, render) in items.iter(ecs) {
+        items_batch.set(point.clone() - offset, render.color, render.glyph);
+        rendered_tiles += 1;
+    }
+    items_batch.submit(rendered_tiles).expect("Render error");
+
     let mut actors_batch = DrawBatch::new();
-    actors_batch.target(2);
+    actors_batch.target(3);
     let mut actors =
         <(&Point, &Render)>::query().filter(component::<Player>() | component::<NPC>());
     for (point, render) in actors.iter(ecs) {

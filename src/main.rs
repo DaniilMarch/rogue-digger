@@ -15,11 +15,7 @@ mod prelude {
     pub const DISPLAY_HEIGHT: i32 = SCREEN_HEIGHT / 2;
 }
 
-use boot::{
-    game_state::State,
-    initial_level,
-    terminal,
-};
+use boot::{game_state::State, initial_level, terminal};
 use components::common::{Player, Render};
 use prelude::*;
 use resources::turn_state::TurnState;
@@ -37,6 +33,11 @@ fn main() -> BError {
         },
         Point::new(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2),
     ));
-    state.resources.insert(resources::camera::Camera::new(Point::new(DISPLAY_WIDTH, DISPLAY_HEIGHT)));
+    state
+        .resources
+        .insert(resources::camera::Camera::new(Point::new(
+            DISPLAY_WIDTH,
+            DISPLAY_HEIGHT,
+        )));
     main_loop(ctx, state)
 }
