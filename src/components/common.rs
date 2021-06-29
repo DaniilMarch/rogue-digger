@@ -21,8 +21,10 @@ pub struct MovementIntention {
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Item;
 
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct DroppingLoot;
+#[derive(Clone, Copy)]
+pub struct DroppingLoot {
+    pub add_loot: fn(&mut CommandBuffer, Point) -> (),
+}
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DeathIntention {

@@ -2,6 +2,18 @@ use crate::components::common::*;
 use crate::components::level::*;
 use crate::prelude::*;
 
+pub fn wall_loot(commands: &mut CommandBuffer, point: Point) {
+    println!("Adding item");
+    commands.push((
+        Item,
+        Render {
+            color: ColorPair::new(YELLOW, BLACK),
+            glyph: '/' as u16,
+        },
+        point,
+    ));
+}
+
 pub fn generate(ecs: &mut World) {
     for x in 0..=SCREEN_WIDTH {
         for y in 0..=SCREEN_HEIGHT {
@@ -33,6 +45,9 @@ pub fn generate(ecs: &mut World) {
                 (0, to_cp437('░'), ColorPair::new(WHITE, BLACK)),
             ],
         },
+        DroppingLoot {
+            add_loot: wall_loot,
+        },
     ));
     ecs.push((
         Point::new(SCREEN_WIDTH / 2 - 2, SCREEN_HEIGHT / 2 - 2),
@@ -50,6 +65,9 @@ pub fn generate(ecs: &mut World) {
                 (25, to_cp437('░'), ColorPair::new(WHITE, BLACK)),
                 (0, to_cp437('░'), ColorPair::new(WHITE, BLACK)),
             ],
+        },
+        DroppingLoot {
+            add_loot: wall_loot,
         },
     ));
 }

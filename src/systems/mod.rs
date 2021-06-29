@@ -2,6 +2,7 @@ use crate::prelude::*;
 mod breakable;
 mod cleanup;
 mod collisions;
+mod dropping_loot;
 mod movement;
 mod player_input;
 mod render;
@@ -22,6 +23,7 @@ pub fn build_player_turn_scheduler() -> Schedule {
         .add_system(collisions::collisions_system())
         .flush()
         .add_system(movement::movement_system())
+        .add_system(dropping_loot::dropping_loot_system())
         .flush()
         .add_system(cleanup::cleanup_system())
         .flush()
@@ -35,6 +37,7 @@ pub fn build_npc_turn_scheduler() -> Schedule {
         .add_system(collisions::collisions_system())
         .flush()
         .add_system(movement::movement_system())
+        .add_system(dropping_loot::dropping_loot_system())
         .flush()
         .add_system(cleanup::cleanup_system())
         .flush()

@@ -32,6 +32,7 @@ pub fn render(ecs: &SubWorld, #[resource] camera: &Camera) {
     items_batch.target(2);
     let mut items = <(&Point, &Render)>::query().filter(component::<Item>());
     for (point, render) in items.iter(ecs) {
+        println!("drawing item");
         items_batch.set(point.clone() - offset, render.color, render.glyph);
         rendered_tiles += 1;
     }
