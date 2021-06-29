@@ -1,6 +1,6 @@
+use crate::components::common::{DeathIntention, MovementIntention, Player, Render};
+use crate::components::level::Breakable;
 use crate::prelude::*;
-use crate::components::common::{MovementIntention, Player, Render};
-use crate::components::level::{Breakable};
 
 #[system]
 #[read_component(Breakable)]
@@ -16,7 +16,9 @@ pub fn breakable(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
     let mut points: Vec<Point> = Vec::new();
     for movement_intention in movers.iter(ecs) {
         for (_, point, _) in walls.iter(ecs) {
-            if point.x == movement_intention.destination.x && point.y == movement_intention.destination.y {
+            if point.x == movement_intention.destination.x
+                && point.y == movement_intention.destination.y
+            {
                 points.push(*point);
                 break;
             }
@@ -30,7 +32,7 @@ pub fn breakable(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
                 breakable.health -= 10;
                 for (treshold, glyph, color_pair) in breakable.render_set.iter() {
                     if breakable.health <= 0 {
-                        commands.remove(*entity);
+                        commands.push(((), DeathIntention { entity: *entity }));
                         break;
                     }
                     if breakable.health >= *treshold {

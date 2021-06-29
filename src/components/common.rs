@@ -17,3 +17,14 @@ pub struct MovementIntention {
     pub destination: Point,
     pub entity: Entity,
 }
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Item;
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct DroppingLoot;
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct DeathIntention {
+    pub entity: Entity,
+}

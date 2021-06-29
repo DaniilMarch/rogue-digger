@@ -1,10 +1,11 @@
 use crate::prelude::*;
+mod breakable;
+mod cleanup;
+mod collisions;
 mod movement;
 mod player_input;
 mod render;
 mod turn_end;
-mod collisions;
-mod breakable;
 
 pub fn build_player_input_scheduler() -> Schedule {
     Schedule::builder()
@@ -22,6 +23,8 @@ pub fn build_player_turn_scheduler() -> Schedule {
         .flush()
         .add_system(movement::movement_system())
         .flush()
+        .add_system(cleanup::cleanup_system())
+        .flush()
         .add_system(render::render_system())
         .add_system(turn_end::turn_end_system())
         .build()
@@ -32,6 +35,8 @@ pub fn build_npc_turn_scheduler() -> Schedule {
         .add_system(collisions::collisions_system())
         .flush()
         .add_system(movement::movement_system())
+        .flush()
+        .add_system(cleanup::cleanup_system())
         .flush()
         .add_system(render::render_system())
         .add_system(turn_end::turn_end_system())
