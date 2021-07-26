@@ -3,6 +3,7 @@ mod boot;
 mod components;
 mod resources;
 mod systems;
+mod level_generation;
 
 mod prelude {
     pub use bracket_lib::prelude::*;
@@ -15,16 +16,20 @@ mod prelude {
     pub const DISPLAY_HEIGHT: i32 = SCREEN_HEIGHT / 2;
 }
 
-use boot::{game_state::State, initial_level, terminal};
+use boot::{game_state::State, terminal};
 use components::common::{Player, Render};
 use prelude::*;
 use resources::turn_state::TurnState;
+use level_generation::initial_test_generator::InitialTestGenerator;
+use level_generation::LevelGenerator;
 
 fn main() -> BError {
     let ctx = terminal::build();
     let mut state = State::new();
     state.resources.insert(TurnState::PlayerInput);
-    initial_level::generate(&mut state.ecs);
+    let mut generator = InitialTestGenerator::new();
+    generator.register_world(&mut state.ecs);
+    generator.build_test_environment();
     state.ecs.push((
         Player,
         Render {
