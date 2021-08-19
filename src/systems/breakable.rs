@@ -29,7 +29,7 @@ pub fn breakable(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
     for matching_point in points {
         for (entity, breakable, point, render) in breaking.iter_mut(ecs) {
             if point.x == matching_point.x && point.y == matching_point.y {
-                breakable.health -= 10;
+                breakable.health -= 20;
                 for (treshold, glyph, color_pair) in breakable.render_set.iter() {
                     if breakable.health <= 0 {
                         commands.push(((), DeathIntention { entity: *entity }));

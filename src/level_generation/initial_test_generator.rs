@@ -40,7 +40,7 @@ impl<'a > InitialTestGenerator<'a> {
                 }
             }
 
-            (*ecs).push((
+            ecs.push((
                 Point::new(SCREEN_WIDTH / 2 - 1, SCREEN_HEIGHT / 2 - 1),
                 Wall,
                 Render {
@@ -62,7 +62,7 @@ impl<'a > InitialTestGenerator<'a> {
                 },
             ));
 
-            (*ecs).push((
+            ecs.push((
                 Point::new(SCREEN_WIDTH / 2 - 2, SCREEN_HEIGHT / 2 - 2),
                 Wall,
                 Render {

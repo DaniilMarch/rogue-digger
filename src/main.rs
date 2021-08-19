@@ -21,15 +21,16 @@ use components::common::{Player, Render};
 use prelude::*;
 use resources::turn_state::TurnState;
 use level_generation::initial_test_generator::InitialTestGenerator;
+use level_generation::circle_room_generator::CircleRoomGenerator;
 use level_generation::LevelGenerator;
 
 fn main() -> BError {
     let ctx = terminal::build();
     let mut state = State::new();
     state.resources.insert(TurnState::PlayerInput);
-    let mut generator = InitialTestGenerator::new();
+    let mut generator = CircleRoomGenerator::new(5);
     generator.register_world(&mut state.ecs);
-    generator.build_test_environment();
+    generator.generate_circle();
     state.ecs.push((
         Player,
         Render {
